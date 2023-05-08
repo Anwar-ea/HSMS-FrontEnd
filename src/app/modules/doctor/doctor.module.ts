@@ -5,6 +5,9 @@ import { DoctorRoutingModule } from './doctor-routing.module';
 import { DoctorRootComponent } from './doctor-root/doctor-root.component';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { SharedModule } from 'src/app/shared-module/shared-module';
+import { ToastModule } from 'primeng/toast';
+import { MessagesModule } from 'primeng/messages';
+import { ButtonModule } from 'primeng/button';
 
 
 @NgModule({
@@ -15,7 +18,11 @@ import { SharedModule } from 'src/app/shared-module/shared-module';
   imports: [
     CommonModule,
     DoctorRoutingModule,
-    SharedModule
-  ]
+    SharedModule,
+    ToastModule,
+    MessagesModule,
+    ButtonModule
+  ],
+  providers:[]
 })
 export class DoctorModule { }
