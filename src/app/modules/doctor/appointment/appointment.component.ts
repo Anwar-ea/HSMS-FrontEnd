@@ -8,7 +8,8 @@ import { AlertService } from 'src/app/Services/alert/alert.service';
 })
 export class AppointmentComponent {
 constructor(private alertService:AlertService){}
-
+showDialogueMethod!: () => void;
+hideDialogue: any;
 successAlert(){
   this.alertService.success('this is success', 'success summary');
 }
@@ -27,5 +28,8 @@ infoAlert(){
   this.alertService.info('this is info', 'success info');
 
 }
+
+showDialogue = (methode: () => void): void => { methode() }
+
 
 }

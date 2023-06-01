@@ -8,7 +8,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { SharedModule } from './shared-module/shared-module';
 import { AddTokenModalComponent } from './modules/dialog/add-token-modal/add-token-modal.component';
 import { RegistrationModule } from './modules/registration/registration.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './modules/home/home.component';
 import { createCustomElement } from '@angular/elements';
 import { PrimeNGConfig, MessageService } from 'primeng/api';
@@ -16,13 +16,20 @@ import { ToastModule } from 'primeng/toast';
 import { MessagesModule } from 'primeng/messages';
 import { GenericTableComponent } from "./Shared/components/generic-table/generic-table.component";
 import { LoaderComponent } from './Shared/components/loader/loader.component';
+import { AppHttpInterceptor } from './auth/interceptor/app-http.interceptor';
 @NgModule({
     declarations: [
         AppComponent,
         HomeComponent,
         AddTokenModalComponent,
     ],
-    providers: [MessageService],
+    providers: [MessageService, 
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AppHttpInterceptor,
+        multi: true
+      }
+    ],
     bootstrap: [AppComponent],
     entryComponents: [AppComponent],
     imports: [

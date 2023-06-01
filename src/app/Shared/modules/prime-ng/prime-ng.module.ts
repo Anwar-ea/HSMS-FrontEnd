@@ -23,6 +23,10 @@ import { SlideMenuModule } from "primeng/slidemenu";
 import { SliderModule } from "primeng/slider";
 import { PaginatorModule } from "primeng/paginator";
 import { ButtonModule } from "primeng/button";
+import { TreeSelectModule } from 'primeng/treeselect';
+import { CalendarModule } from 'primeng/calendar';
+import { AutoCompleteModule } from 'primeng/autocomplete';
+import { PanelMenuModule } from 'primeng/panelmenu';
 
 @NgModule({
   declarations: [],
@@ -51,7 +55,11 @@ import { ButtonModule } from "primeng/button";
     SlideMenuModule,
     SliderModule,
     PaginatorModule,
-    ButtonModule
+    ButtonModule,
+    TreeSelectModule,
+    CalendarModule,
+    AutoCompleteModule,
+    PanelMenuModule
   ],
   providers:[
     MessageService

@@ -25,4 +25,8 @@ export class UserService extends HttpService {
     return this.post(`${this.baseEndpoint}/${Endpoints.Login}`, loginUser);
   }
 
+  addUser(user: IUser): Observable<any>{
+    return this.post(`${this.baseEndpoint}/register/user`, user)
+  }
+
 }

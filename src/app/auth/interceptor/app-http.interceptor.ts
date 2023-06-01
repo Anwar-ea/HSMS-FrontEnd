@@ -16,9 +16,10 @@ export class AppHttpInterceptor implements HttpInterceptor {
   
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     this.userStateService.User_State.subscribe((x: any)=>{
-      if (x.user.token){
+      
+      if (x.token){
         request = request.clone({
-          headers: request.headers.set('Authorization', `Bearer ${x.user.accessToken}`)         
+          headers: request.headers.set('Authorization', `Bearer ${x.token}`)         
         });
       }
     });

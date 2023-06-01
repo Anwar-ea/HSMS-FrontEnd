@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ILoginUser } from '../../../models/login-user';
 import { UserService } from '../../../Services/user.service';
+import { AuthService } from 'src/app/Services/auth-service/auth.service';
+import { UserStateService } from 'src/app/State/user/user.service';
+import { Router } from '@angular/router';
+import { AlertService } from '../../../Services/alert/alert.service';
+import { ILogedInUser } from 'src/app/models/Iloggedinuser';
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -10,7 +15,7 @@ import { UserService } from '../../../Services/user.service';
 export class SignInComponent implements OnInit {
   loginForm!: FormGroup;
 
-  constructor(private readonly userService: UserService) {
+  constructor(private readonly userService: UserService, private readonly authService: AuthService, private readonly userStateService: UserStateService, private router: Router, private alertService: AlertService) {
 
     this.loginForm = new FormGroup({
       email: new FormControl<string>('', [Validators.required, Validators.email, Validators.pattern('[A-Za-z0-9._%-]+@[A-Za-z0-9._%-]+\\.[a-z, A-Z]{2,3}')]),
@@ -38,16 +43,18 @@ export class SignInComponent implements OnInit {
         rememberMe: formLogin.rememberMe
       }
       console.log(loginPayload);
-      this.userService.login(loginPayload).subscribe((x: any) => {
-        console.log(x);
-        
-      })
-      
-      // for (const control of Object.keys(this.loginForm.controls)) {
-      //   this.loginForm.controls[control].markAsTouched();
-      // }
-      // return;
-    // }
+      this.authService.login(loginPayload).subscribe({
+      next: (x: any) => {
+        let userToState : ILogedInUser = {
+          ...x.user, token: x.accessToken
+        }
+        this.userStateService.setLogedInUser(userToState)
+        this.router.navigate(['/dashboard']);
+      },
+      error: err =>{
+        this.alertService.error('There Was an error while loging in.', 'Somthing went Wrong')
+      }
+    })
   }
 
 
