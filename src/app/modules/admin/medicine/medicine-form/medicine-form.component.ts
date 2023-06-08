@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MedicineType } from 'src/app/models/enums/Medicine-Type-Enum';
-import { PotencyUnits } from 'src/app/models/enums/potency-units';
+import { MedicineType } from 'src/app/constants/enums/Medicine-Type-Enum';
+import { PotencyUnits } from 'src/app/constants/enums/potency-units';
 import { MedicineService } from '../../../../Services/medicine-service/medicine.service';
 import { AlertService } from '../../../../Services/alert/alert.service';
-import { IMedicinerequest } from 'src/app/models/medicine-Request';
+import { IMedicinerequest } from 'src/app/models/interfaces/medicine-Request';
 
 @Component({
   selector: 'app-medicine-form',
@@ -39,6 +39,10 @@ export class MedicineFormComponent {
       type: new FormControl<number|null>(null, [Validators.required]),
       salts: new FormControl<string>('', [Validators.required]),
       price: new FormControl<number|null>(null, [Validators.required])
+    })
+    this.medicineService.getMedicine().subscribe({
+      next: (x:any) => {console.log(x);},
+      error: (err: Error) => {}
     })
   }
   // //#region getters

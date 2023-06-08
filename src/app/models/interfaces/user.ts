@@ -1,4 +1,4 @@
-import { Genders } from "./enums/Gender-enum"
+import { Genders } from "src/app/constants/enums/Gender-enum";
 
 export interface IUser {
     firstName: string;

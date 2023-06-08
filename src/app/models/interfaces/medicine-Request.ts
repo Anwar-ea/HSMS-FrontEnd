@@ -1,5 +1,6 @@
-import { MedicineType } from "./enums/Medicine-Type-Enum";
-import { PotencyUnits } from "./enums/potency-units";
+import { MedicineType } from "src/app/constants/enums/Medicine-Type-Enum";
+import { PotencyUnits } from "src/app/constants/enums/potency-units";
+
 
 export interface IMedicinerequest{
     name: string,

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Roles } from 'src/app/models/enums/Roles-Enum';
+import { Roles } from 'src/app/constants/enums/Roles-Enum';
 import { UserService } from '../../../../Services/user.service';
 import { UserStateService } from 'src/app/State/user/user.service';
-import { IUser } from 'src/app/models/user';
+import { IUser } from 'src/app/models/interfaces/user';
 import { AlertService } from '../../../../Services/alert/alert.service';
-import { ILogedInUser } from 'src/app/models/Iloggedinuser';
+import { ILogedInUser } from 'src/app/models/interfaces/Iloggedinuser';
 
 @Component({
   selector: 'app-user-form',
@@ -14,7 +14,7 @@ import { ILogedInUser } from 'src/app/models/Iloggedinuser';
 })
 export class UserFormComponent implements OnInit {
   userForm!: FormGroup;
-  roles: RolesDisplay[] = [{id: Roles.Doctor, name: 'Doctor'}, {id: Roles.Nurse, name: 'Nurse'}, {id: Roles.Patient, name: 'Ptient'}];
+  roles: RolesDisplay[] = [{id: Roles.Doctor, name: 'Doctor'}, {id: Roles.Nurse, name: 'Nurse'}, {id: Roles.Patient, name: 'Ptient'}, {id: Roles.Admin, name: 'Admin'}, {id: Roles.LabTechnician, name: 'Lab Technician'}, {id: Roles.Sweeper, name: 'Sweeper'}];
   selectedRole!: RolesDisplay;
   constructor (private fb: FormBuilder, private readonly userService: UserService, private readonly userStateService: UserStateService, private readonly alertService: AlertService){
     this.userForm = this.fb.group({

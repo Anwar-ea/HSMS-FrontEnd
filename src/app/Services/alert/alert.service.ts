@@ -8,9 +8,7 @@ export class AlertService {
 
   constructor(private messageService: MessageService) {}
 
-  success(message: string, summary?: string, life?: number, styleClass?: string, sticky?: boolean, closeable?: boolean, icon?: string, key?:string) {
-    console.log('success');
-    
+  success(message: string, summary?: string, life?: number, styleClass?: string, sticky?: boolean, closeable?: boolean, icon?: string, key?:string) {    
     this.messageService.add({
       severity: 'success',
       summary: summary || 'Success',
@@ -25,8 +23,6 @@ export class AlertService {
   }
 
   info(message: string, summary?: string, life?: number, styleClass?: string, sticky?: boolean, closeable?: boolean, icon?: string, key?:string) {
-    console.log('info');
-
     this.messageService.add({
       severity: 'info',
       summary: summary || 'Info',
@@ -41,8 +37,6 @@ export class AlertService {
   }
 
   warning(message: string, summary?: string, life?: number, styleClass?: string, sticky?: boolean, closeable?: boolean, icon?: string, key?:string) {
-        console.log('warning');
-
     this.messageService.add({
       severity: 'warn',
       summary: summary || 'Warning',
@@ -57,8 +51,6 @@ export class AlertService {
   }
 
   error(message: string, summary?: string, life?: number, styleClass?: string, sticky?: boolean, closeable?: boolean, icon?: string, key?:string) {
-    console.log('error');
-
     this.messageService.add({
       severity: 'error',
       summary: summary || 'Error',

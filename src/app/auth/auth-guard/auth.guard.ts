@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserStateService } from 'src/app/State/user/user.service';
-import { ILogedInUser } from 'src/app/models/Iloggedinuser';
-import { Roles } from 'src/app/models/enums/Roles-Enum';
+import { ILogedInUser } from 'src/app/models/interfaces/Iloggedinuser';
+import { Roles } from 'src/app/constants/enums/Roles-Enum';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +17,15 @@ export class AuthGuard implements CanActivate {
     let canActivate = false;
 
     if(!this.userStateService.isLogedIn()) {
+      console.log('not Loged in');
+      
       this.router.navigate(['/sign-in'])
       return  canActivate;   
     }
 
     
     this.userStateService.getUserState().subscribe((x: ILogedInUser) => {      
-      if(x.roles.includes('Admin') && route.routeConfig?.path === 'admin') canActivate = true 
+      if(x && x?.roles.includes('Admin') && route.routeConfig?.path === 'admin') canActivate = true 
     });
     
     if(this.userStateService.isLogedIn()) return true;

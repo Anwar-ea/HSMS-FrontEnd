@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { PrimeNgModule } from '../../modules/prime-ng/prime-ng.module';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Table } from 'primeng/table';
+import { ITableColumns } from 'src/app/models/interfaces/table-Columns';
+import { DataTypesEnum } from 'src/app/constants/enums/dataTypes';
 
 @Component({
   selector: 'app-generic-table',
@@ -11,72 +13,97 @@ import { Table } from 'primeng/table';
   imports:[
     CommonModule,
     PrimeNgModule
-  ]
+  ],
+  providers:[DatePipe]
 })
 export class GenericTableComponent {
+    @Input() data!: any[];
+    @Input() columns!: ITableColumns[];
+    @Input() filterColumns!: any[];
+    @Input() showActions!: boolean;
+    @Input() totalRecords: number = 0;
+    
+    @Output() edit: EventEmitter<any> = new EventEmitter<any>();
+    @Output() delete: EventEmitter<any> = new EventEmitter<any>();
     customers:any[] = [];
 
-    representatives: any[] = [];
+    options: any[] = [];
 
     statuses: any[]= [];
 
-    loading: boolean = true;
+    @Input() loading: boolean = false;
 
     activityValues: number[] = [0, 100];
 
-    constructor() {}
+    constructor(private readonly datePipe: DatePipe) {}
 
     ngOnInit() {
-        // this.customerService.getCustomersLarge().then((customers: any) => {
-        //     this.customers = customers;
-        //     this.loading = false;
+        this.filterColumns = this.columns.map(x => {
+            if(x.globalSearch) return x.property;
+            else return
+        });
+    }
 
-        //     this.customers.forEach((customer) => (customer.date = new Date(customer.date)));
-        // });
-
-        this.representatives = [
-            { name: 'Amy Elsner', image: 'amyelsner.png' },
-            { name: 'Anna Fali', image: 'annafali.png' },
-            { name: 'Asiya Javayant', image: 'asiyajavayant.png' },
-            { name: 'Bernardo Dominic', image: 'bernardodominic.png' },
-            { name: 'Elwin Sharvill', image: 'elwinsharvill.png' },
-            { name: 'Ioni Bowcher', image: 'ionibowcher.png' },
-            { name: 'Ivan Magalhaes', image: 'ivanmagalhaes.png' },
-            { name: 'Onyama Limba', image: 'onyamalimba.png' },
-            { name: 'Stephen Shaw', image: 'stephenshaw.png' },
-            { name: 'Xuxue Feng', image: 'xuxuefeng.png' }
-        ];
-
-        this.statuses = [
-            { label: 'Unqualified', value: 'unqualified' },
-            { label: 'Qualified', value: 'qualified' },
-            { label: 'New', value: 'new' },
-            { label: 'Negotiation', value: 'negotiation' },
-            { label: 'Renewal', value: 'renewal' },
-            { label: 'Proposal', value: 'proposal' }
-        ];
+    resolveField(a: any, b: ITableColumns){
+        console.log(this.filterColumns);
+        
+        if(b.columnType === DataTypesEnum.Date) return this.datePipe.transform(a[b.property], 'MM/dd/yyyy');
+        if(b.columnType === DataTypesEnum.Enum) return b.enum[a[b.property]];
+        if(b.valueToShow) return b.valueToShow(a[b.property]);
+        return a[b.property]        
     }
 
     clear(table: Table) {
         table.clear();
     }
 
-    // getSeverity(status:any) {
-    //     switch (status) {
-    //         case 'unqualified':
-    //             return 'danger';
+    actionEmitter(data: any, action: string){
+        if(action === 'edit') this.edit.emit(data);
+        if(action === 'delete') this.delete.emit(data);
+    }
 
-    //         case 'qualified':
-    //             return 'success';
+    filterFunction(event: any){
+        console.log(event);
+        
+    }
+    
+    pageChange(event: any){
+        console.log(event);
+        
+    }
 
-    //         case 'new':
-    //             return 'info';
+    sort(event: any){
+        console.log(event);
 
-    //         case 'negotiation':
-    //             return 'warning';
+    }
 
-    //         case 'renewal':
-    //             return null;
-    //     }
-    // }
+    filter(event: any){
+        console.log(event);
+
+    }
+
+    lazyload(event :any){
+        console.log(event);
+
+    }
+
+    getSeverity(status:any) {
+        switch (status) {
+            case 'unqualified':
+                return 'danger';
+
+            case 'qualified':
+                return 'success';
+
+            case 'new':
+                return 'info';
+
+            case 'negotiation':
+                return 'warning';
+
+            case 'renewal':
+                return '';
+                default: return '';
+        }
+    }
 }

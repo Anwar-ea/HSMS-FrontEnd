@@ -38,7 +38,16 @@
             <div class="text-danger" *ngIf="(medicineForm.controls['type'].errors && medicineForm.controls['type'].touched) || (medicineForm.controls['type'].dirty && medicineForm.controls['type'].errors)">Please select a type.</div>
         </div>
         <div class="d-flex flex-column">
-            <button class="btn btn-primary col-2" type="submit">Submit</button>
+            <button class="btn btn-primary col-2"
+                [disabled]="
+                (medicineForm.controls['name'].errors || !medicineForm.controls['name'].valid) &&
+                (medicineForm.controls['potency'].errors || !medicineForm.controls['potency'].valid) &&
+                (medicineForm.controls['potencyUnit'].errors || !medicineForm.controls['potencyUnit'].valid) &&
+                (medicineForm.controls['price'].errors || !medicineForm.controls['price'].valid) &&
+                (medicineForm.controls['salts'].errors || !medicineForm.controls['salts'].valid) &&
+                (medicineForm.controls['type'].errors || !medicineForm.controls['type'].valid) 
+                "
+            type="submit">Submit</button>
         </div>
     </form>
 </div>

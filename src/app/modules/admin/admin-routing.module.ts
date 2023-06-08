@@ -13,20 +13,25 @@ import { BedFormComponent } from './beds/bed-form/bed-form.component';
 import { HumanRecourcesComponent } from './human-resources/human-recources/human-recources.component';
 import { ShiftsComponent } from './Shifts/shifts/shifts.component';
 import { DataImpExpComponent } from './import-export/data-imp-exp/data-imp-exp.component';
+import { TestsListComponent } from './tests/tests-list/tests-list.component';
+import { CategoriesListComponent } from './categories/categories-list/categories-list.component';
 
 const routes: Routes = [
   {path:'', component: AdminRootComponent, children:[
     {path: '', component: UserFormComponent},
+    {path: 'user-list', component: UserListComponent},
     {path: 'user-form', component: UserFormComponent},
     {path: 'medicine', component: MedicineFormComponent},
+    {path: 'medicine-list', component: MedicineListComponent},
     {path: 'wards', component: WardFormComponent},
     {path: 'categories', component: CategoriesFormComponent},
+    {path: 'category-list', component: CategoriesListComponent},
     {path: 'tests', component: TestsFormComponent},
+    {path: 'tests-list', component: TestsListComponent},
     {path: 'beds', component: BedFormComponent},
     {path: 'shifts', component: ShiftsComponent},
     {path: 'HR', component: HumanRecourcesComponent},
     {path: 'data-import-export', component: DataImpExpComponent},
-    // {path: 'user-list', component: UserListComponent},
   ]}
 ];
 

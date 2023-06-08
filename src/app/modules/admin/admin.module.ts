@@ -22,33 +22,35 @@ import { BedFormComponent } from './beds/bed-form/bed-form.component';
 import { HumanRecourcesComponent } from './human-resources/human-recources/human-recources.component';
 import { ShiftsComponent } from './Shifts/shifts/shifts.component';
 import { DataImpExpComponent } from './import-export/data-imp-exp/data-imp-exp.component'
+import { GenericTableComponent } from "../../Shared/components/generic-table/generic-table.component";
 
 @NgModule({
-  declarations: [
-    AdminRootComponent,
-    AdminSideNavComponent,
-    UserFormComponent,
-    UserListComponent,
-    WardListComponent,
-    WardFormComponent,
-    MedicineListComponent,
-    MedicineFormComponent,
-    CategoriesListComponent,
-    CategoriesFormComponent,
-    TestsListComponent,
-    TestsFormComponent,
-    BedsComponent,
-    BedFormComponent,
-    HumanRecourcesComponent,
-    ShiftsComponent,
-    DataImpExpComponent
-  ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    PrimeNgModule,
-    FormsModule,
-    ReactiveFormsModule
-  ]
+    declarations: [
+        AdminRootComponent,
+        AdminSideNavComponent,
+        UserFormComponent,
+        UserListComponent,
+        WardListComponent,
+        WardFormComponent,
+        MedicineListComponent,
+        MedicineFormComponent,
+        CategoriesListComponent,
+        CategoriesFormComponent,
+        TestsListComponent,
+        TestsFormComponent,
+        BedsComponent,
+        BedFormComponent,
+        HumanRecourcesComponent,
+        ShiftsComponent,
+        DataImpExpComponent
+    ],
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        PrimeNgModule,
+        FormsModule,
+        ReactiveFormsModule,
+        GenericTableComponent
+    ]
 })
 export class AdminModule { }

@@ -15,4 +15,19 @@ export class EncryptionService {
     const bytes = CryptoJS.AES.decrypt(encryptedData, environment.encryptionKey);
     return bytes.toString(CryptoJS.enc.Utf8);
   }
+
+  encryptToLocalStorage(key: string, data: any){
+    let dataToEncrypt = JSON.stringify(data);
+    let encryptedData = CryptoJS.AES.encrypt(dataToEncrypt, environment.encryptionKey).toString();
+    localStorage.setItem(key, encryptedData);
+  }
+
+  decryptFromLocalStorage(key: string): any{
+    let encryptedData = localStorage.getItem(key) ?? '';
+    let decryptedData = CryptoJS.AES.decrypt(encryptedData, environment.encryptionKey).toString(CryptoJS.enc.Utf8);
+    
+    if(decryptedData !== undefined && decryptedData !== null && decryptedData !== '') return JSON.parse(decryptedData);
+    
+    return null;
+  }
 }

@@ -28,7 +28,8 @@ import { AppHttpInterceptor } from './auth/interceptor/app-http.interceptor';
         provide: HTTP_INTERCEPTORS,
         useClass: AppHttpInterceptor,
         multi: true
-      }
+      },
+      AppHttpInterceptor
     ],
     bootstrap: [AppComponent],
     entryComponents: [AppComponent],

@@ -9,34 +9,8 @@ import { LoaderService } from '../../Services/loader/loader.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private readonly userService: UserStateService, private loaderService:LoaderService) { }
+  constructor( private loaderService:LoaderService) { }
 
   ngOnInit(): void {
   }
-
-  getUser(){
-    this.userService.User_State.subscribe(x=>{
-      console.log(x);      
-    });   
-  }
-
-  adduser(){
-  }
-
-  setStateData(){
-    this.userService.setData();
-  }
-
-  getStateData(){
-    this.userService.getData();
-  }
-
-  hideLoader(){
-    this.loaderService.hide();
-  }
-
-  showLoader(){
-    this.loaderService.show();
-  }
-
 }

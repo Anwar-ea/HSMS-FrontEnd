@@ -27,6 +27,9 @@ import { TreeSelectModule } from 'primeng/treeselect';
 import { CalendarModule } from 'primeng/calendar';
 import { AutoCompleteModule } from 'primeng/autocomplete';
 import { PanelMenuModule } from 'primeng/panelmenu';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { TagModule } from 'primeng/tag';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @NgModule({
   declarations: [],
@@ -59,7 +62,10 @@ import { PanelMenuModule } from 'primeng/panelmenu';
     TreeSelectModule,
     CalendarModule,
     AutoCompleteModule,
-    PanelMenuModule
+    PanelMenuModule,
+    MultiSelectModule,
+    TagModule,
+    ProgressBarModule
   ],
   providers:[
     MessageService

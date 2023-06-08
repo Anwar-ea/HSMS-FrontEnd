@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { EncryptionService } from 'src/app/Services/encryption-service/encryption.service';
-import { ILogedInUser } from 'src/app/models/Iloggedinuser';
+import { ILogedInUser } from 'src/app/models/interfaces/Iloggedinuser';
 
 @Injectable({
   providedIn: 'root'
@@ -24,15 +24,16 @@ export class UserStateService {
   }
   
   getUserState(): Observable<ILogedInUser>{
-    return this.User_State
+    return this.User_State as Observable<ILogedInUser>
   }
 
   isLogedIn(): boolean{
     let logedIn = false;
     
-    this.User_State.subscribe(x =>{
-      if(x && x !== '') logedIn = true;      
-    })
+    this.User_State.subscribe({next: x =>{
+      if(x && x !== '' && x !== null) logedIn = true;            
+    },
+    error: (err)=>{}})
     return logedIn;
   }
 
@@ -59,8 +60,7 @@ export class UserStateService {
   }
 
   destroyUserState(){
-    this.User_State.complete();
-    this.User_State.unsubscribe();
+    this.User_State.next(null);
     localStorage.removeItem(this.stateName);
   }
   

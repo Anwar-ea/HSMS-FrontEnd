@@ -4,5 +4,7 @@ export enum BaseEndPoints {
     Token = 'token',
     Messages = 'message',
     Account = 'account',
-    Medicine = 'medicine'
+    Medicine = 'medicine',
+    Test = 'labtest',
+    Category = 'labtestcategory'
 }
